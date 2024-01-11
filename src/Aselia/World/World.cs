@@ -1,32 +1,34 @@
-﻿using Aselia.src.Aselia.Player;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Aselia
+{
+	public class World
+	{
 
-namespace Aselia.src.Aselia.World {
-    internal class World {
-        private Player.Player player;
 
-        public World() {
-            player = new Player.Player();
-        }
+		private readonly Player player;
 
-        public void tick() {
-            player.tick();
-        }
+		public World()
+		{
+			player = new Player();
+		}
 
-        public void render() {
-            player.render();
-        }
-    }
+		public void Tick()
+		{
+			player.Tick();
+		}
 
-    internal class Column {
+		public void Render()
+		{
+			player.Render();
+		}
+	}
 
-    }
+	public class Column
+	{
 
-    internal class Chunk {
+	}
 
-    }
+	public class Chunk
+	{
+
+	}
 }
