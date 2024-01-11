@@ -1,4 +1,4 @@
-﻿using Aselia.Math;
+﻿
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -8,23 +8,27 @@ public sealed class Camera
 {
 	public float camScale;
 	public int width, height;
-	public Vec2f pos;
+	public Vector2 position;
 
 	public Camera(float x, float y)
 	{
 		width = GameInstance.Instance.graphics.PreferredBackBufferWidth;
 		height = GameInstance.Instance.graphics.PreferredBackBufferHeight;
 		GameInstance.Log(width + " " + height);
-		pos = new Vec2f(x + width / 2, y + height / 2);
+
+
+		position = new Vector2(x + width / 2, y + height / 2);
+		
+
 	}
 
 	/*public void setPos(float x, float y) {
 		pos.set(x - width / 2, y - height / 2);
 	}*/
 
-	public void Render(Texture2D t, Vec2f tpos)
+	public void Render(Texture2D t, Vector2 tpos)
 	{
-		GameInstance.Instance.batch.Draw(t, pos.substract(tpos).substractl(t.Width / 2, t.Height).asXNAVector(), Color.White);
+		GameInstance.Instance.Batch.Draw(t, tpos, Color.White);
 	}
 }
 

@@ -1,11 +1,11 @@
-﻿using Aselia.Math;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework.Graphics;
+using System.Numerics;
 
 namespace Aselia;
 public class Player
 {
 	private Texture2D texture;
-	private Vec2f pos = new Vec2f();
+	private Vector2 pos = new Vector2();
 
 	public Player()
 	{

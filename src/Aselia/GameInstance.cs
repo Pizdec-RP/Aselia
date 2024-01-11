@@ -10,7 +10,7 @@ namespace Aselia
 
 		public static GameInstance Instance;
 		public GraphicsDeviceManager graphics;
-		public SpriteBatch batch;
+		public SpriteBatch Batch;
 		private World world;
 		public Camera Camera;
 
@@ -32,7 +32,7 @@ namespace Aselia
 
 		protected override void LoadContent()
 		{
-			batch = new SpriteBatch(GraphicsDevice);
+			Batch = new SpriteBatch(GraphicsDevice);
 
 
 		}
@@ -50,11 +50,11 @@ namespace Aselia
 		protected override void Draw(GameTime gameTime)
 		{
 			GraphicsDevice.Clear(Color.CornflowerBlue);
-			batch.Begin();
+			Batch.Begin();
 
 			world.Render();
 
-			batch.End();
+			Batch.End();
 			base.Draw(gameTime);
 		}
 
