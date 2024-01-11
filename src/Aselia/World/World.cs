@@ -21,4 +21,12 @@ namespace Aselia.src.Aselia.World {
             player.render();
         }
     }
+
+    internal class Column {
+
+    }
+
+    internal class Chunk {
+
+    }
 }

@@ -59,7 +59,7 @@ namespace Aselia.src.Aselia {
         }
 
         public static void log(String text) {
-            System.Diagnostics.Debug.WriteLine(text);
+            System.Diagnostics.Debug.WriteLine("[Log] "+text);
         }
     }
 }
