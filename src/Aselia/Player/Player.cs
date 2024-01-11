@@ -9,6 +9,8 @@ public class Player
 
 	public Player()
 	{
+		
+
 		texture = GameInstance.Instance.Content.Load<Texture2D>("player");
 	}
 
