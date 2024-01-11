@@ -5,7 +5,7 @@ using System;
 
 namespace Aselia
 {
-	internal class GameInstance : Game
+	public class GameInstance : Game
 	{
 
 		public static GameInstance Instance;

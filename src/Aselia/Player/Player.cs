@@ -1,7 +1,8 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Aselia.Math;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Aselia;
-internal class Player
+public class Player
 {
 	private Texture2D texture;
 	private Vec2f pos = new Vec2f();

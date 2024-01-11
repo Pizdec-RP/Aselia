@@ -1,6 +1,6 @@
 ﻿namespace Aselia
 {
-	internal class World
+	public class World
 	{
 
 
@@ -22,12 +22,12 @@
 		}
 	}
 
-	internal class Column
+	public class Column
 	{
 
 	}
 
-	internal class Chunk
+	public class Chunk
 	{
 
 	}

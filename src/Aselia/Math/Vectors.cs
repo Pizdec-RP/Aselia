@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 
 namespace Aselia.Math;
-internal class Vec2f
+public class Vec2f
 {
 	private static Vector2 template = new Vector2(0, 0);
 	public float x, y;
@@ -65,7 +65,7 @@ internal class Vec2f
 		return template;
 	}
 
-	internal void set(float x, float y)
+	public void set(float x, float y)
 	{
 		this.x = x; this.y = y;
 	}

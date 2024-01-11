@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Aselia")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5fe7de1454611f94f7610b1d6dc8df1d28c9ba12")]
 [assembly: System.Reflection.AssemblyProductAttribute("Aselia")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Aselia")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
