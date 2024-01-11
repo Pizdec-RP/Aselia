@@ -14,6 +14,8 @@ public sealed class Camera
 	{
 		width = GameInstance.Instance.graphics.PreferredBackBufferWidth;
 		height = GameInstance.Instance.graphics.PreferredBackBufferHeight;
+
+
 		GameInstance.Log(width + " " + height);
 
 
@@ -28,7 +30,9 @@ public sealed class Camera
 
 	public void Render(Texture2D t, Vector2 tpos)
 	{
-		GameInstance.Instance.Batch.Draw(t, tpos, Color.White);
+		var pos = (position - tpos) - new Vector2(t.Width / 2, t.Height);
+
+		GameInstance.Instance.Batch.Draw(t, pos, Color.White);
 	}
 }
 
