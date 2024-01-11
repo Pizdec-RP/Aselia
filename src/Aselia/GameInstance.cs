@@ -7,7 +7,7 @@ namespace Aselia
 {
 	public class GameInstance : Game
 	{
-		public static GameInstance Instance { get; } = new();
+		public static GameInstance Instance { get; set; }
 
 		
 		public GraphicsDeviceManager Graphics { get; private set; }
@@ -17,6 +17,7 @@ namespace Aselia
 
 		public GameInstance()
 		{
+
 			Graphics = new GraphicsDeviceManager(this);
 			Content.RootDirectory = "Content";
 			IsMouseVisible = true;		
