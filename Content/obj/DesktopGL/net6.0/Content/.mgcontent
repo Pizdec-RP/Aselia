@@ -4,7 +4,7 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/qm080/Desktop/aselia/Content/player.png</File>
+    <File>C:/Users/Title/Source/Repos/Aselia/Content/player.png</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />

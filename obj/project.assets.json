@@ -102,19 +102,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\qm080\\.nuget\\packages\\": {}
+    "C:\\Users\\Title\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\qm080\\Desktop\\aselia\\Aselia.csproj",
+      "projectUniqueName": "C:\\Users\\Title\\Source\\Repos\\Aselia\\Aselia.csproj",
       "projectName": "Aselia",
-      "projectPath": "C:\\Users\\qm080\\Desktop\\aselia\\Aselia.csproj",
-      "packagesPath": "C:\\Users\\qm080\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\qm080\\Desktop\\aselia\\obj\\",
+      "projectPath": "C:\\Users\\Title\\Source\\Repos\\Aselia\\Aselia.csproj",
+      "packagesPath": "C:\\Users\\Title\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Title\\Source\\Repos\\Aselia\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\qm080\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Title\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -122,6 +127,8 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
+        "I:\\LocalNuget": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -134,6 +141,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -165,7 +177,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }
