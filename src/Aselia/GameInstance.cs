@@ -7,19 +7,19 @@ namespace Aselia
 {
 	public class GameInstance : Game
 	{
+		public static GameInstance Instance { get; } = new();
 
-		public static GameInstance Instance;
-		public GraphicsDeviceManager graphics;
-		public SpriteBatch Batch;
+		
+		public GraphicsDeviceManager Graphics { get; private set; }
+		public SpriteBatch Batch { get; private set; }
 		private World world;
 		public Camera Camera;
 
 		public GameInstance()
 		{
-			graphics = new GraphicsDeviceManager(this);
+			Graphics = new GraphicsDeviceManager(this);
 			Content.RootDirectory = "Content";
-			IsMouseVisible = true;
-			GameInstance.Instance = this;
+			IsMouseVisible = true;		
 		}
 
 		protected override void Initialize()
