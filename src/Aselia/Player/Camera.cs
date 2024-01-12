@@ -19,7 +19,8 @@ public sealed class Camera
 		position = new Vector2(x + width / 2, y + height / 2);
     }
 
-	public void setPos(float x, float y) {
+	public void setPos(float x, float y)
+    {
 		position.X = x + width / 2;
         position.Y = y + height / 2;
     }
@@ -34,7 +35,8 @@ public sealed class Camera
 		GameInstance.Instance.Batch.Draw(t, r, Color.White);
     }
 
-    public void RenderTexture(Texture2D t, float x, float y, float width, float height) {
+    public void RenderTexture(Texture2D t, float x, float y, float width, float height)
+    {
         r.Width = (int)(width * camScale);
         r.X = (int)(position.X - x);
         r.Height = (int)(height * camScale);

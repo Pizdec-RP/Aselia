@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Aselia;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -20,9 +21,9 @@ namespace Blocks {
             this.X = x; this.Y = y;
         }
 
-        public Texture2D GetTexture() { return null; }
-        public Rectangle GetBoundingBox() { return new Rectangle(); }
-        public Block Clone(int x, int y) { return null; }
+        public virtual Texture2D GetTexture() { return null; }
+        public virtual Rectangle GetBoundingBox() { return new Rectangle(); }
+        public virtual Block Clone(int x, int y) { return null; }
     }
 
     class Air : Block {
@@ -31,17 +32,17 @@ namespace Blocks {
             
         }
 
-        public new Texture2D GetTexture()
+        public override Texture2D GetTexture()
         {
             return null;
         }
 
-        public new Rectangle GetBoundingBox()
+        public override Rectangle GetBoundingBox()
         {
             return new Rectangle(this.X, this.Y, this.X+1, this.Y+1);
         }
 
-        public new Air Clone(int x, int y)
+        public override Air Clone(int x, int y)
         {
             return new Air(x, y);
         }
@@ -52,18 +53,18 @@ namespace Blocks {
         {
 
         }
-
-        public new Texture2D GetTexture()
+        
+        public override Texture2D GetTexture()
         {
-            return null;
+            return GameInstance.Instance.Content.Load<Texture2D>("stone");
         }
 
-        public new Rectangle GetBoundingBox()
+        public override Rectangle GetBoundingBox()
         {
             return new Rectangle(this.X, this.Y, this.X + 1, this.Y + 1);
         }
 
-        public new Stone Clone(int x, int y)
+        public override Stone Clone(int x, int y)
         {
             return new Stone(x, y);
         }
