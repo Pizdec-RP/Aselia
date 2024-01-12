@@ -1,4 +1,4 @@
-﻿using Aselia.src.Aselia.World;
+﻿using Entities;
 using Microsoft.Xna.Framework.Graphics;
 using System.Numerics;
 

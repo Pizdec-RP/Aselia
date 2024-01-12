@@ -10,7 +10,8 @@ using System.Threading.Tasks;
 namespace Blocks {
     internal class Block {
         public static Dictionary<int, Block> blocks = new Dictionary<int, Block>() {
-            {0, new Air(0,0)}
+            {0, new Air(0,0)},
+            {1, new Stone(0,0)},
         };
 
         public int X { get; set; }
@@ -54,9 +55,11 @@ namespace Blocks {
 
         }
         
+        private static Texture2D Texture;
         public override Texture2D GetTexture()
         {
-            return GameInstance.Instance.Content.Load<Texture2D>("stone");
+            if (Texture == null) Texture = GameInstance.Instance.Content.Load<Texture2D>("stone");
+            return Texture;
         }
 
         public override Rectangle GetBoundingBox()

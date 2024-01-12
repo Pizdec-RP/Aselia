@@ -75,28 +75,44 @@ namespace Aselia
 
 		private void updateModel()
 		{
-            RenderTarget2D rt = new RenderTarget2D(GameInstance.Instance.GraphicsDevice, 256, 256);
+            Texture2D rt = new Texture2D(GameInstance.Instance.GraphicsDevice, 256, 256);
+            Color[] pixels = new Color[256*256];
 
             for (int i = 0; i < 32; i++) {
 				for (int j = 0; j < 32; j++) {
 					Texture2D texture = Block.blocks[blocks[i, j]].GetTexture();
-					
-					//отрисовка текстуры на модели
-				}
+                    Color[] overlayPixels = new Color[8*8];
+                    texture.GetData(overlayPixels);
+
+                    int startX = i*8;
+                    int startY = j*8;
+
+                    for (int y = 0; y < 8; y++) {
+                        for (int x = 0; x < 8; x++) {
+                            int baseIndex = (startY + y) * 256 + (startX + x);
+                            int overlayIndex = y * 8 + x;
+
+                            if (overlayPixels[overlayIndex].A != 0) {
+                                pixels[baseIndex] = overlayPixels[overlayIndex];
+                            }
+                        }
+                    }
+                }
 			}
+			rt.SetData(pixels);
 			model = rt;
-			needUpdate = false;
         }
 
 		public void Render()
 		{
             if (needUpdate) {
 				updateModel();
+                needUpdate = false;
             }
             //рендер бекграунда
             //рендер мобов
 
-            //GameInstance.Instance.Camera.RenderTexture(model, texturepos.X, texturepos.Y, 32, 32);
+            GameInstance.Instance.Camera.RenderTexture(model, texturepos.X, texturepos.Y, 32, 32);
 
             /*for (int i = 0; i < 32; i++) {
                 for (int j = 0; j < 32; j++) {

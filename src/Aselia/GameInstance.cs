@@ -24,7 +24,7 @@ namespace Aselia
 
 			Graphics = new GraphicsDeviceManager(this);
 			Content.RootDirectory = "Content";
-			IsMouseVisible = true;		
+			IsMouseVisible = true;
 		}
 
 		protected override void Initialize()
