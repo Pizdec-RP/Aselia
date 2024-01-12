@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Blocks;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -9,10 +10,12 @@ namespace Aselia
 	{
 		private readonly Player player;
         private Dictionary<Point, Chunk> chunks = new Dictionary<Point, Chunk>();
+		private List<Point> renderingChunks = new List<Point>();
 
 		public World()
 		{
 			player = new Player();
+			renderingChunks.Add(new Point(0,-1));
 			//Microsoft.Xna.Framework.
         }
 
@@ -24,14 +27,19 @@ namespace Aselia
 		public void Render()
 		{
 			player.Render();
+			foreach (Point p in renderingChunks) {
+				getChunk(p).Render();
+            }
             //рендер партиклов?
         }
 
-        public void setBlock(int id, int x, int y) {
-			getChunk(new Point(x, y)).setBlock(id, x >> 5, y >> 5);
+        public void setBlock(int id, int x, int y)
+		{
+			getChunk(ToChunkPos(x, y)).setBlock(id, x >> 5, y >> 5);
 		}
 
-		public Chunk getChunk(Point chunkpos) {
+		public Chunk getChunk(Point chunkpos)
+		{
 			if (chunks.ContainsKey(chunkpos)) {
 				return chunks[chunkpos];
 			} else {
@@ -43,7 +51,8 @@ namespace Aselia
 			}
 		}
 
-		public static Point ToChunkPos(float x, float y) {
+		public static Point ToChunkPos(float x, float y)
+		{
 			return new Point(((int)MathF.Floor(x)) >> 5, ((int)MathF.Floor(y)) >> 5);
 		}
 	}
@@ -56,33 +65,54 @@ namespace Aselia
 		private Vector2 texturepos;        //левый нижний угол относительно координат мира
 		private int[,] blocks;
 
-		public Chunk(Point pos) {
+		public Chunk(Point pos)
+		{
 			this.pos = pos;
-			texturepos = new Vector2(pos.X << 5, pos.Y << 5);
+			texturepos = new Vector2(pos.X*256, pos.Y*256);
 			blocks = new int[32, 32];
-		}
+			model = GameInstance.Instance.Content.Load<Texture2D>("stone"); //чиста для теста
+        }
 
-		private void updateModel() {
-			//update
+		private void updateModel()
+		{
+            RenderTarget2D rt = new RenderTarget2D(GameInstance.Instance.GraphicsDevice, 256, 256);
+
+            for (int i = 0; i < 32; i++) {
+				for (int j = 0; j < 32; j++) {
+					Texture2D texture = Block.blocks[blocks[i, j]].GetTexture();
+					
+					//отрисовка текстуры на модели
+				}
+			}
+			model = rt;
 			needUpdate = false;
         }
 
-		public void Render() {
-			if (needUpdate) {
+		public void Render()
+		{
+            if (needUpdate) {
 				updateModel();
-
-                //рендер бекграунда
-                //рендер мобов
-				//рендер блоков
             }
+            //рендер бекграунда
+            //рендер мобов
+
+            //GameInstance.Instance.Camera.RenderTexture(model, texturepos.X, texturepos.Y, 32, 32);
+
+            /*for (int i = 0; i < 32; i++) {
+                for (int j = 0; j < 32; j++) {
+                    GameInstance.Instance.Camera.RenderTexture(model, texturepos.X+i*8, texturepos.Y+j*8, 1, 1);
+                }
+            } ставлю этому коду 0 фпсов из 10 */
         }
 
-		public void Tick() {
+        public void Tick()
+		{
 			//протикивание живности
 		}
 
-		public void Generate() {
-			for (float i = pos.X << 5; i < (pos.X << 5 + 32); i++) { // i = 0 - 32
+		public void Generate()
+		{
+			/*for (float i = pos.X << 5; i < (pos.X << 5 + 32); i++) {
 				float columnHeight = MathF.Sin(i);
 				float normHeight = columnHeight * 128;
 				for (int j = 0; j < 32; j++) {
@@ -90,12 +120,18 @@ namespace Aselia
 						setBlock(1, ((int)i) % 32, j);
 					}
 				}
-            }
+            }*/
+			for (int i = 0; i < 32; i++) {
+				for (int j = 0; j < 32; j++) {
+                    setBlock(1, i, j);
+                }
+			}
 		}
 
-		public void setBlock(int id, int x, int y) {
+		public void setBlock(int id, int x, int y)
+		{
 			blocks[x,y]	= id;
             needUpdate = true;
         }
-	}
+    }
 }

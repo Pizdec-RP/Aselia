@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Diagnostics;
 
 namespace Aselia
 {
@@ -14,8 +15,11 @@ namespace Aselia
 		public SpriteBatch Batch { get; private set; }
 		private World world;
 		public Camera Camera;
+        SimpleFps fps = new SimpleFps();
+        SpriteFont font;
+		Vector2 v = new Vector2(10, 10);
 
-		public GameInstance()
+        public GameInstance()
 		{
 
 			Graphics = new GraphicsDeviceManager(this);
@@ -28,7 +32,8 @@ namespace Aselia
 			// TODO: Add your initialization logic here
 			world = new World();
 			Camera = new Camera(0f, 0f);
-			base.Initialize();
+            font = Content.Load<SpriteFont>("Underdog");
+            base.Initialize();
 		}
 
 		protected override void LoadContent()
@@ -43,9 +48,9 @@ namespace Aselia
 			if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
 				Exit();
 
-			world.Tick();
+			//world.Tick(); нужен отдельный поток 50 тиков в секунду
 
-			base.Update(gameTime);
+            base.Update(gameTime);
 		}
 
 		protected override void Draw(GameTime gameTime)
@@ -55,13 +60,46 @@ namespace Aselia
 
 			world.Render();
 
-			Batch.End();
+			fps.Update(gameTime);
+
+            Batch.DrawString(font, fps.msg, v, Color.White);
+
+            Batch.End();
 			base.Draw(gameTime);
 		}
 
 		public static void Log(String text)
 		{
-			System.Diagnostics.Debug.WriteLine("[Log] " + text);
+            Trace.WriteLine("[Log] " + text);
 		}
 	}
+
+    public class SimpleFps {
+        private double frames = 0;
+        private double updates = 0;
+        private double elapsed = 0;
+        private double last = 0;
+        private double now = 0;
+        public double msgFrequency = 1.0f;
+        public string msg = "";
+
+        public void Update(GameTime gameTime) {
+            now = gameTime.TotalGameTime.TotalSeconds;
+            elapsed = (double)(now - last);
+            if (elapsed > msgFrequency) {
+                msg = " Fps: " + (frames / elapsed).ToString() + "\n Elapsed time: " + elapsed.ToString() + "\n Updates: " + updates.ToString() + "\n Frames: " + frames.ToString();
+                //Console.WriteLine(msg);
+                elapsed = 0;
+                frames = 0;
+                updates = 0;
+                last = now;
+            }
+            updates++;
+        }
+
+        public void DrawFps(SpriteBatch spriteBatch, SpriteFont font, Vector2 fpsDisplayPosition, Color fpsTextColor) {
+            spriteBatch.DrawString(font, msg, fpsDisplayPosition, fpsTextColor);
+            frames++;
+        }
+    }
 }

@@ -1,25 +1,26 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Aselia.src.Aselia.World;
+using Microsoft.Xna.Framework.Graphics;
 using System.Numerics;
 
 namespace Aselia;
-public class Player
+public class Player : Entity
 {
 	private Texture2D texture;
-	private Vector2 pos = new Vector2();
 
 	public Player()
 	{
 		texture = GameInstance.Instance.Content.Load<Texture2D>("player");
 	}
 
-	public void Render()
+	public new void Render()
 	{
-		GameInstance.Instance.Camera.RenderEntity(texture, pos.X, pos.Y, 0.9f, 1.8f);
+		base.Render();
+		GameInstance.Instance.Camera.RenderEntity(texture, pos.X, pos.Y, 1.4f, 2.85f);
 	}
 
-	public void Tick()
+	public new void Tick()
 	{
-		//pos.Y -= 0.1f;
+		base.Tick();
 	}
 }
 
