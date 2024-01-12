@@ -80,7 +80,10 @@ namespace Aselia
 
             for (int i = 0; i < 32; i++) {
 				for (int j = 0; j < 32; j++) {
-					Texture2D texture = Block.blocks[blocks[i, j]].GetTexture();
+					Block tblock = Block.blocks[blocks[i, j]];
+					if (!tblock.isRenderable()) continue;
+                    Texture2D texture = tblock.GetTexture();
+					
                     Color[] overlayPixels = new Color[8*8];
                     texture.GetData(overlayPixels);
 
@@ -128,20 +131,20 @@ namespace Aselia
 
 		public void Generate()
 		{
-			/*for (float i = pos.X << 5; i < (pos.X << 5 + 32); i++) {
+			for (float i = pos.X << 5; i < (pos.X << 5 + 32); i++) {
 				float columnHeight = MathF.Sin(i);
-				float normHeight = columnHeight * 128;
+				float normHeight = columnHeight * 5;
 				for (int j = 0; j < 32; j++) {
 					if (((pos.Y << 5) + j) <= normHeight) {
 						setBlock(1, ((int)i) % 32, j);
 					}
 				}
-            }*/
-			for (int i = 0; i < 32; i++) {
+            }
+			/*for (int i = 0; i < 32; i++) {
 				for (int j = 0; j < 32; j++) {
                     setBlock(1, i, j);
                 }
-			}
+			}*/
 		}
 
 		public void setBlock(int id, int x, int y)

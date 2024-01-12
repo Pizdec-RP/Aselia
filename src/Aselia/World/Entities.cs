@@ -18,7 +18,7 @@ namespace Entities
 
         public void Tick()
         {
-
+            pos.Y -= 0.05f;
         }
 
         public void Render()

@@ -25,6 +25,7 @@ namespace Blocks {
         public virtual Texture2D GetTexture() { return null; }
         public virtual Rectangle GetBoundingBox() { return new Rectangle(); }
         public virtual Block Clone(int x, int y) { return null; }
+        public virtual Boolean isRenderable() { return true; }
     }
 
     class Air : Block {
@@ -46,6 +47,11 @@ namespace Blocks {
         public override Air Clone(int x, int y)
         {
             return new Air(x, y);
+        }
+
+        public override Boolean isRenderable()
+        { 
+            return false;
         }
     }
 
