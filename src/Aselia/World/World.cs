@@ -8,12 +8,13 @@ namespace Aselia
 	public class World
 	{
 		private readonly Player player;
-		private Dictionary<Point, Chunk> chunks = new Dictionary<Point, Chunk>();
+        private Dictionary<Point, Chunk> chunks = new Dictionary<Point, Chunk>();
 
 		public World()
 		{
 			player = new Player();
-		}
+			//Microsoft.Xna.Framework.
+        }
 
 		public void Tick()
 		{
@@ -23,8 +24,6 @@ namespace Aselia
 		public void Render()
 		{
 			player.Render();
-
-			
             //рендер партиклов?
         }
 
@@ -52,9 +51,9 @@ namespace Aselia
 	public class Chunk
 	{
 		private Texture2D model;
-		private Point pos;
+		private Point pos;                 //сжатые координаты
 		private Boolean needUpdate = true;
-		private Vector2 texturepos;
+		private Vector2 texturepos;        //левый нижний угол относительно координат мира
 		private int[,] blocks;
 
 		public Chunk(Point pos) {
@@ -83,7 +82,15 @@ namespace Aselia
 		}
 
 		public void Generate() {
-
+			for (float i = pos.X << 5; i < (pos.X << 5 + 32); i++) { // i = 0 - 32
+				float columnHeight = MathF.Sin(i);
+				float normHeight = columnHeight * 128;
+				for (int j = 0; j < 32; j++) {
+					if (((pos.Y << 5) + j) <= normHeight) {
+						setBlock(1, ((int)i) % 32, j);
+					}
+				}
+            }
 		}
 
 		public void setBlock(int id, int x, int y) {

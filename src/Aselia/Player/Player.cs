@@ -14,12 +14,12 @@ public class Player
 
 	public void Render()
 	{
-		GameInstance.Instance.Camera.Render(texture, pos);
+		GameInstance.Instance.Camera.RenderEntity(texture, pos.X, pos.Y, 0.9f, 1.8f);
 	}
 
 	public void Tick()
 	{
-
+		//pos.Y -= 0.1f;
 	}
 }
 
