@@ -30,6 +30,15 @@ namespace Aselia
 			foreach (Point p in renderingChunks) {
 				getChunk(p).Render();
             }
+
+			Vector4 f = GameInstance.Instance.Camera.GetFrustum();
+			Texture2D t = Block.blocks[1].GetTexture();
+
+			GameInstance.Instance.Camera.RenderTexture(t, (int)f.X - 1, (int)f.Y - 1, 2, 2);
+            GameInstance.Instance.Camera.RenderTexture(t, (int)f.Z - 1, (int)f.Y - 1, 2, 2);
+            GameInstance.Instance.Camera.RenderTexture(t, (int)f.X - 1, (int)f.W - 1, 2, 2);
+            GameInstance.Instance.Camera.RenderTexture(t, (int)f.Z - 1, (int)f.W - 1, 2, 2);
+
             //рендер партиклов?
         }
 
@@ -116,12 +125,6 @@ namespace Aselia
             //рендер мобов
 
             GameInstance.Instance.Camera.RenderTexture(model, texturepos.X, texturepos.Y, 32, 32);
-
-            /*for (int i = 0; i < 32; i++) {
-                for (int j = 0; j < 32; j++) {
-                    GameInstance.Instance.Camera.RenderTexture(model, texturepos.X+i*8, texturepos.Y+j*8, 1, 1);
-                }
-            } ставлю этому коду 0 фпсов из 10 */
         }
 
         public void Tick()
@@ -131,7 +134,7 @@ namespace Aselia
 
 		public void Generate()
 		{
-			for (float i = pos.X << 5; i < (pos.X << 5 + 32); i++) {
+			/*for (float i = pos.X << 5; i < (pos.X << 5 + 32); i++) {
 				float columnHeight = MathF.Sin(i);
 				float normHeight = columnHeight * 5;
 				for (int j = 0; j < 32; j++) {
@@ -139,12 +142,14 @@ namespace Aselia
 						setBlock(1, ((int)i) % 32, j);
 					}
 				}
-            }
-			/*for (int i = 0; i < 32; i++) {
+            }*/
+			for (int i = 0; i < 32; i++) {
 				for (int j = 0; j < 32; j++) {
-                    setBlock(1, i, j);
+					if (j << 5 <= 40) {
+                        setBlock(1, i, j);
+                    }
                 }
-			}*/
+			}
 		}
 
 		public void setBlock(int id, int x, int y)

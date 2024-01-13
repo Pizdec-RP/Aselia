@@ -48,8 +48,8 @@ namespace Aselia
 			if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
 				Exit();
 
-			//world.Tick(); нужен отдельный поток 50 тиков в секунду
-
+            //world.Tick(); нужен отдельный поток 50 тиков в секунду
+            fps.Update(gameTime);
             base.Update(gameTime);
 		}
 
@@ -60,9 +60,7 @@ namespace Aselia
 
 			world.Render();
 
-			fps.Update(gameTime);
-
-            Batch.DrawString(font, fps.msg, v, Color.White);
+            fps.DrawFps(Batch, font, v, Color.White);
 
             Batch.End();
 			base.Draw(gameTime);
