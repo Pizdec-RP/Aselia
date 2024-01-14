@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Apos.Camera;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -14,10 +15,11 @@ namespace Aselia
 		public GraphicsDeviceManager Graphics { get; private set; }
 		public SpriteBatch Batch { get; private set; }
 		private World world;
-		public Camera Camera;
-        SimpleFps fps = new SimpleFps();
-        SpriteFont font;
-		Vector2 v = new Vector2(10, 10);
+		public Renderer Renderer;
+		public IVirtualViewport defaultViewport;
+        private SimpleFps fps = new SimpleFps();
+        private SpriteFont font;
+		private Vector2 fpsPos = new Vector2(10, 10);
 
         public GameInstance()
 		{
@@ -31,7 +33,8 @@ namespace Aselia
 		{
 			// TODO: Add your initialization logic here
 			world = new World();
-			Camera = new Camera(0f, 0f);
+            defaultViewport = new DefaultViewport(GraphicsDevice, Window);
+            Renderer = new Renderer(0f, 0f);
             font = Content.Load<SpriteFont>("Underdog");
             base.Initialize();
 		}
@@ -60,7 +63,7 @@ namespace Aselia
 
 			world.Render();
 
-            fps.DrawFps(Batch, font, v, Color.White);
+            fps.DrawFps(Batch, font, fpsPos, Color.White);
 
             Batch.End();
 			base.Draw(gameTime);

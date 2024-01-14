@@ -16,7 +16,6 @@ namespace Aselia
 		{
 			player = new Player();
 			renderingChunks.Add(new Point(0,-1));
-			//Microsoft.Xna.Framework.
         }
 
 		public void Tick()
@@ -30,14 +29,6 @@ namespace Aselia
 			foreach (Point p in renderingChunks) {
 				getChunk(p).Render();
             }
-
-			Vector4 f = GameInstance.Instance.Camera.GetFrustum();
-			Texture2D t = Block.blocks[1].GetTexture();
-
-			GameInstance.Instance.Camera.RenderTexture(t, (int)f.X - 1, (int)f.Y - 1, 2, 2);
-            GameInstance.Instance.Camera.RenderTexture(t, (int)f.Z - 1, (int)f.Y - 1, 2, 2);
-            GameInstance.Instance.Camera.RenderTexture(t, (int)f.X - 1, (int)f.W - 1, 2, 2);
-            GameInstance.Instance.Camera.RenderTexture(t, (int)f.Z - 1, (int)f.W - 1, 2, 2);
 
             //рендер партиклов?
         }
@@ -124,7 +115,7 @@ namespace Aselia
             //рендер бекграунда
             //рендер мобов
 
-            GameInstance.Instance.Camera.RenderTexture(model, texturepos.X, texturepos.Y, 32, 32);
+            GameInstance.Instance.Renderer.RenderTexture(model, texturepos.X, texturepos.Y, 32, 32);
         }
 
         public void Tick()

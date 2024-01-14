@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Aselia;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,8 +24,9 @@ namespace Entities
 
         public void Render()
         {
-            pos.Y -= 1f;
-            pos.X += 1f;
+            //pos.Y += 1f;
+            //pos.X += 1f;
+            //GameInstance.Log(pos.Y.ToString());
         }
     }
 }

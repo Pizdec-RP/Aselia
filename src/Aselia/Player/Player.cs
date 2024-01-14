@@ -15,8 +15,8 @@ public class Player : Entity
 	public new void Render()
 	{
 		base.Render();
-		GameInstance.Instance.Camera.RenderEntity(texture, pos.X, pos.Y, 1.4f, 2.85f);
-        GameInstance.Instance.Camera.setPos(pos.X, pos.Y);
+		//GameInstance.Instance.Renderer.RenderEntity(texture, pos.X, pos.Y, 1.4f, 2.85f);
+        //GameInstance.Instance.Renderer.setPos(pos.X, pos.Y);
     }
 
 	public new void Tick()
