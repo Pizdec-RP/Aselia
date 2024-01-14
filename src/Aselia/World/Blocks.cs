@@ -61,11 +61,9 @@ namespace Blocks {
 
         }
         
-        private static Texture2D Texture;
         public override Texture2D GetTexture()
         {
-            if (Texture == null) Texture = GameInstance.Instance.Content.Load<Texture2D>("stone");
-            return Texture;
+            return GameInstance.Instance.Content.Load<Texture2D>("stone");
         }
 
         public override Rectangle GetBoundingBox()

@@ -136,9 +136,7 @@ namespace Aselia
             }*/
 			for (int i = 0; i < 32; i++) {
 				for (int j = 0; j < 32; j++) {
-					if (j << 5 <= 40) {
-                        setBlock(1, i, j);
-                    }
+                    setBlock(1, i, j);
                 }
 			}
 		}

@@ -10,8 +10,6 @@ namespace Aselia
 	public class GameInstance : Game
 	{
 		public static GameInstance Instance { get; set; }
-
-		
 		public GraphicsDeviceManager Graphics { get; private set; }
 		public SpriteBatch Batch { get; private set; }
 		private World world;
