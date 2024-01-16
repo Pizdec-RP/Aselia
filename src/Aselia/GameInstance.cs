@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonoGame.Extended;
 using System;
 using System.Diagnostics;
 
@@ -12,17 +13,17 @@ namespace Aselia
 		public static GameInstance Instance { get; set; }
 		public GraphicsDeviceManager Graphics { get; private set; }
 		public SpriteBatch Batch { get; private set; }
-		private World world;
-		public Renderer Renderer;
-		public IVirtualViewport defaultViewport;
+        public Camera camera;
+        public IVirtualViewport defaultViewport;
         private SimpleFps fps = new SimpleFps();
         private SpriteFont font;
-		private Vector2 fpsPos = new Vector2(10, 10);
+        private Vector2 fpsPos;
 
         public GameInstance()
 		{
-
 			Graphics = new GraphicsDeviceManager(this);
+            Graphics.PreferredBackBufferWidth = 1280;
+            Graphics.PreferredBackBufferHeight = 720;
 			Content.RootDirectory = "Content";
 			IsMouseVisible = true;
 		}
@@ -30,12 +31,19 @@ namespace Aselia
 		protected override void Initialize()
 		{
 			// TODO: Add your initialization logic here
-			world = new World();
             defaultViewport = new DefaultViewport(GraphicsDevice, Window);
-            Renderer = new Renderer(0f, 0f);
             font = Content.Load<SpriteFont>("Underdog");
             base.Initialize();
-		}
+            camera = new Camera(GameInstance.Instance.defaultViewport);
+            int width = GameInstance.Instance.defaultViewport.Width;
+            int height = GameInstance.Instance.defaultViewport.Height;
+            //GameInstance.Log(width + " " + height);
+            Vector2 v = camera.ScreenToWorld(width / 2, height / 2);
+            //GameInstance.Log(v.ToString());
+            camera.XY = new Vector2(v.X, v.Y);//камера на 0 0
+
+            fpsPos = camera.ScreenToWorld(10, 10);
+        }
 
 		protected override void LoadContent()
 		{
@@ -57,9 +65,14 @@ namespace Aselia
 		protected override void Draw(GameTime gameTime)
 		{
 			GraphicsDevice.Clear(Color.CornflowerBlue);
-			Batch.Begin();
+			Batch.Begin(transformMatrix: camera.View);
 
-			world.Render();
+            Texture2D t = GameInstance.Instance.Content.Load<Texture2D>("stone");
+
+            Vector2 pos = camera.WorldToScreen(0,0);
+            Vector2 size = camera.WorldToScreen(10,10);
+
+            Batch.Draw(t, new Rectangle((int)pos.X, (int)pos.Y, (int)size.X, (int)size.Y), Color.White);
 
             fps.DrawFps(Batch, font, fpsPos, Color.White);
 
